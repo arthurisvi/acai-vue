@@ -1,7 +1,7 @@
 <template>
-  <div id="footer">
-   <p>Footer</p>
-  </div>
+  <footer id="footer">
+   <p>Monte seu Açaí &copy; 2022 </p>
+  </footer>
 </template>
 
 <script>
@@ -12,6 +12,16 @@ export default{
 </script>
 
 <style scoped>
+    #footer{
+        height: 200px;
+        background-color: #4C2D51;
+        border-bottom: 4px solid #4C2D51;
+        color: #FFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%
+    }
 
 
 </style>
