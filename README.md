@@ -1,4 +1,4 @@
-# make_your_burger_vue
+# Monte seu açai
 
 ## Project setup
 ```

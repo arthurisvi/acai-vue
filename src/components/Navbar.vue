@@ -45,7 +45,7 @@ export default{
 
     #logo{
         width: 60px;
-        height: 100px;
+        height: 60px;
     }
 
 </style>
