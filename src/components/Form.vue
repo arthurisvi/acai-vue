@@ -2,7 +2,7 @@
 <div>
     <p>Componente de mensagem</p>
     <div>
-        <form id="acai-form">
+        <form id="acai-form" @submit="createAcai">
             <div class = "input-container">
                 <label for="fruits">Escolha o tamanho do copo: </label>
                 <select name="cup-size" id ="cup-size" v-model ="cupSize">
@@ -15,14 +15,14 @@
             <div id = "optional-container"  class = "input-container">
                 <label id = "optional-title" for="fruits">Escolha 1 ou mais frutas: </label>
                 <div class = "checkbox-container" v-for="fruit in fruits" :key="fruit.id">
-                   <input type ="checkbox" name = "fruits" :value="fruit.tipo" v-model="fruits">
+                   <input type ="checkbox" name = "fruits" :value="fruit.tipo" v-model="fruitsData">
                     <span>{{ fruit.tipo }}</span>
                 </div>
             </div>
             <div id = "optional-container" class = "input-container">
-                <label id = "optional-title" for="complement">Escolha 1 ou mais complementos: </label>
+                <label id = "optional-title" for="complements">Escolha 1 ou mais complementos: </label>
                 <div class = "checkbox-container" v-for="complement in complements" :key="complement.id">
-                   <input type ="checkbox" name = "complements" :value="complement.tipo" v-model="complements">
+                   <input type ="checkbox" name = "complements" :value="complement.tipo" v-model="complementsData">
                     <span>{{ complement.tipo }}</span>
                 </div>
             </div>
@@ -45,19 +45,44 @@ export default{
             fruits: null,
             complements: null,
             cupSize: null, 
-            fruit: [],
-            complement: [],
-            status: "Solicitado",
+            fruitsData: [],
+            complementsData: [],
             message: null
         }
     }, methods:{
         async getIngredients(){
-            const req = await fetch("https://api-acai.herokuapp.com/ingredients");
-            const data = await req.json();
+            const req = await fetch("https://api-acai.herokuapp.com/ingredients")
+            const data = await req.json()
 
             this.sizes = data.sizes
             this.fruits = data.fruits
             this.complements = data.complements
+        }, 
+
+        async createAcai(e){
+            e.preventDefault()
+
+            const data ={
+                cupSize: this.cupSize,
+                fruit: Array.from(this.fruitsData),
+                complement: Array.from(this.complementsData),
+                status: "Solicitado"
+            }
+
+            const dataJson = JSON.stringify(data)
+
+            const req = await fetch("https://api-acai.herokuapp.com/listAcai", {
+                method: "POST",
+                headers: { "Content-Type": "application/json"},
+                body: dataJson
+            })
+
+            const res = await req.json();
+            
+            this.cupSize = ""
+            this.fruitsData = ""
+            this.complementsData = ""
+
         }
     }, mounted(){
         this.getIngredients();
