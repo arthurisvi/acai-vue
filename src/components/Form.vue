@@ -52,7 +52,7 @@ export default{
         }
     }, methods:{
         async getIngredients(){
-            const req = await fetch("http://localhost:3000/ingredients");
+            const req = await fetch("https://api-acai.herokuapp.com/ingredients");
             const data = await req.json();
 
             this.sizes = data.sizes
