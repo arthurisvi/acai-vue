@@ -7,40 +7,23 @@
                 <label for="fruits">Escolha o tamanho do copo: </label>
                 <select name="cup-size" id ="cup-size" v-model ="cupSize">
                     <option value = "">Selecione o tamanho em ml</option>
-                    <option value = "300">300ml</option>
-                    <option value = "500">500ml</option>
-                    <option value = "700">700ml</option>
-                </select>
+                    <option v-for="size in sizes" :key="size.id" :value = "size.tipo">
+                        {{ size.tipo }}
+                    </option>
+            </select>
             </div>
             <div id = "optional-container"  class = "input-container">
                 <label id = "optional-title" for="fruits">Escolha 1 ou mais frutas: </label>
-                <div class = "checkbox-container">
-                    <input type ="checkbox" id = "fruit-banana" name = "fruit-banana" value = "Banana" v-model="fruits">
-                    <span>Banana</span>
-                    <!-- <label for="fruit-banana">Banana</label> -->
-                    <input type ="checkbox" id = "fruit-kiwi" name = "fruit-kiwi" value = "Kiwi" v-model="fruits">
-                    <!-- <label for="fruit-kiwi">Kiwi</label> -->
-                    <span>Kiwi</span>
-                    <input type ="checkbox" id = "fruit-morango" name = "fruit-morango" value= "Morango" v-model="fruits">
-                    <!-- <label for="fruit-morango">Morango</label> -->
-                    <span>Morango</span>
-                    <input type ="checkbox" id = "fruit-abacaxi" name = "fruit-abacaxi" value= "Abacaxi" v-model="fruits">
-                    <!-- <label for="fruit-abacaxi">Abacaxi</label> -->
-                    <span>Abacaxi</span>
+                <div class = "checkbox-container" v-for="fruit in fruits" :key="fruit.id">
+                   <input type ="checkbox" name = "fruits" :value="fruit.tipo" v-model="fruits">
+                    <span>{{ fruit.tipo }}</span>
                 </div>
             </div>
             <div id = "optional-container" class = "input-container">
                 <label id = "optional-title" for="complement">Escolha 1 ou mais complementos: </label>
-                <div class = "checkbox-container">
-                    <input type ="checkbox" id = "complement-oreo" name = "complement-oreo" value = "Oreo" v-model="complement">
-                    <span>Oreo</span>
-                   <!-- <label for="complement-oreo">Oreo</label> -->
-                    <input type ="checkbox" id = "complement-condensed" name = "complement-condensed" value = "Leite Condensado" v-model="complement">
-                    <!-- <label for="complement-condensed">Leite Condensado</label> -->
-                    <span>Leite Condensado</span>
-                    <input type ="checkbox" id = "complement-milk" name = "complement-milk" value = "Leite em pó" v-model="complement">
-                    <span>Leite em pó</span>
-                    <!-- <label for="complement-milk">Leite em pó</label> -->
+                <div class = "checkbox-container" v-for="complement in complements" :key="complement.id">
+                   <input type ="checkbox" name = "complements" :value="complement.tipo" v-model="complements">
+                    <span>{{ complement.tipo }}</span>
                 </div>
             </div>
             <div class = "input-container">
@@ -55,7 +38,30 @@
 <script>
 
 export default{
-    name: 'Form'
+    name: 'Form',
+    data(){
+        return{
+            sizes: null,
+            fruits: null,
+            complements: null,
+            cupSize: null, 
+            fruit: [],
+            complement: [],
+            status: "Solicitado",
+            message: null
+        }
+    }, methods:{
+        async getIngredients(){
+            const req = await fetch("http://localhost:3000/ingredients");
+            const data = await req.json();
+
+            this.sizes = data.sizes
+            this.fruits = data.fruits
+            this.complements = data.complements
+        }
+    }, mounted(){
+        this.getIngredients();
+    }
 
 }
 

@@ -1,62 +1,54 @@
 {
-    "ingredientes": {
-        "paes": [{
+    "ingredients": {
+        "sizes": [{
                 "id": 1,
-                "tipo": "Italiano Branco"
+                "tipo": "300ml"
             },
             {
                 "id": 2,
-                "tipo": "3 Queijos"
+                "tipo": "500ml"
             },
             {
                 "id": 3,
-                "tipo": "Parmesão e Orégano"
+                "tipo": "700ml"
             },
             {
                 "id": 4,
-                "tipo": "Integral"
+                "tipo": "1000ml"
             }
         ],
-        "carnes": [{
+        "fruits": [{
                 "id": 1,
-                "tipo": "Maminha"
+                "tipo": "Banana"
             },
             {
                 "id": 2,
-                "tipo": "Alcatra"
+                "tipo": "Kiwi"
             },
             {
                 "id": 3,
-                "tipo": "Picanha"
+                "tipo": "Morango"
             },
             {
                 "id": 4,
-                "tipo": "Veggie burger"
+                "tipo": "Abacaxi"
             }
         ],
-        "opcionais": [{
+        "complements": [{
                 "id": 1,
-                "tipo": "Bacon"
+                "tipo": "Oreo"
             },
             {
                 "id": 2,
-                "tipo": "Cheddar"
+                "tipo": "Leite Condensado"
             },
             {
                 "id": 3,
-                "tipo": "Salame"
+                "tipo": "Leite em pó"
             },
             {
                 "id": 4,
-                "tipo": "Tomate"
-            },
-            {
-                "id": 4,
-                "tipo": "Cebola roxa"
-            },
-            {
-                "id": 4,
-                "tipo": "Pepino"
+                "tipo": "Disquetes"
             }
         ]
     },
