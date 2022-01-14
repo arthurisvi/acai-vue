@@ -1,8 +1,8 @@
 <template>
 <div>
-    <p>Componente de mensagem</p>
+    <!--<Modal />-->
     <div>
-        <form id="acai-form" @submit="createAcai">
+        <form id="acai-form" @submit="createAcai"> 
             <div class = "input-container">
                 <label for="fruits">Escolha o tamanho do copo: </label>
                 <select name="cup-size" id ="cup-size" v-model ="cupSize">
@@ -26,9 +26,10 @@
                     <span>{{ complement.tipo }}</span>
                 </div>
             </div>
-            <div class = "input-container">
+            <ShowModal />
+            <!-- <div class = "input-container">
                 <input type ="submit" class = "submit-btn" value="Montar açaí">
-            </div>
+            </div> -->
         </form>
     </div>
 </div>
@@ -37,8 +38,15 @@
 
 <script>
 
+import Modal from './Modal.vue'
+import ShowModal from './ShowModal.vue'
+
 export default{
     name: 'Form',
+    components:{
+        Modal,
+        ShowModal
+    },
     data(){
         return{
             sizes: null,
@@ -145,7 +153,7 @@ export default{
         font-weight: bold
     }
 
-    .submit-btn{
+    /* .submit-btn{
         background-color: #4C2D51;
         color: #fff;
         font-weight: bold;
@@ -160,7 +168,7 @@ export default{
     .submit-btn:hover{
         background-color: transparent;
         color: rgb(132, 181, 28, 1);
-    }
+    } */
 
 
 
