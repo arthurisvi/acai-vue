@@ -1,6 +1,7 @@
 <template>
 <div>
     <!--<Modal />-->
+    <Message :msg="msg" v-show="msg"/>
     <div>
         <form id="acai-form" @submit="createAcai"> 
             <div class = "input-container">
@@ -38,6 +39,7 @@
 
 <script>
 
+import Message from './Message'
 import Modal from './Modal.vue'
 import ShowModal from './ShowModal.vue'
 
@@ -45,7 +47,8 @@ export default{
     name: 'Form',
     components:{
         Modal,
-        ShowModal
+        ShowModal, 
+        Message
     },
     data(){
         return{
@@ -55,7 +58,7 @@ export default{
             cupSize: null, 
             fruitsData: [],
             complementsData: [],
-            message: null
+            msg: null
         }
     }, methods:{
         async getIngredients(){
@@ -86,6 +89,9 @@ export default{
             })
 
             const res = await req.json();
+
+            this.msg = `Pedido N° ${res.id} realizado com sucesso!`
+            setTimeout(() => this.msg = "", 2000)
             
             this.cupSize = ""
             this.fruitsData = ""
