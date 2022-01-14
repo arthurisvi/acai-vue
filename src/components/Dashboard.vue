@@ -27,7 +27,8 @@
                         </li>
                     </ul>
                 </div>
-                <select name="status" class="status">
+                <!-- change é para quando houver uma mudança -->
+                <select name="status" class="status" @change="updateAcai($event, acai.id)">
                      <option :value="status.tipo" v-for="status in listStatus" :key="status.id" :selected="acai.status == status.tipo">
                     {{ status.tipo }}
                      </option>
@@ -76,6 +77,19 @@ export default{
 
             this.getPedidos()
 
+        },
+        async updateAcai(event, id){
+            const option = event.target.value
+            
+            const data = JSON.stringify ({ status: option })
+
+            const req = await fetch(`https://api-acai.herokuapp.com/listAcai/${id}`, { 
+                method: "PATCH",
+                headers: { "Content-Type": "application/json"},
+                body: data
+            })
+
+            const res = await req.json()
         }
     }, mounted(){
         this.getPedidos()
