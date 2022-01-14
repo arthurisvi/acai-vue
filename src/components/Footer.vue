@@ -1,6 +1,6 @@
 <template>
   <footer id="footer">
-   <p>Monte seu Açaí &copy; 2022 </p>
+   <p>Monte seu Açaí &copy; 2022 - By Arthur Isvi</p>
   </footer>
 </template>
 
