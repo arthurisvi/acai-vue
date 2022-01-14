@@ -1,5 +1,6 @@
 <template>
     <div id = "acai-table">
+        <Message :msg="msg" v-show="msg" />
         <div>
             <div id="acai-table-heading">
                 <div class ="order-id">N°</div>
@@ -41,13 +42,20 @@
 </template>
 
 <script>
+import Message from './Message'
+
 export default{
+
     name: 'Dashboard',
+    components:{
+        Message
+    },
     data(){
         return{
             listAcai: null,
             acai_id: null,
-            listStatus: []
+            listStatus: [],
+            msg: null
         }
     }, methods:{
 
@@ -75,6 +83,9 @@ export default{
 
             const res = await req.json()
 
+            this.msg = `Pedido cancelado com sucesso!`
+            setTimeout(() => this.msg = "", 2000)
+
             this.getPedidos()
 
         },
@@ -90,6 +101,9 @@ export default{
             })
 
             const res = await req.json()
+
+            this.msg = `O status do pedido N° ${res.id} foi alterado para ${res.status}.`
+            setTimeout(() => this.msg = "", 2000)
         }
     }, mounted(){
         this.getPedidos()
