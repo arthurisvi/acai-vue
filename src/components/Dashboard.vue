@@ -32,7 +32,7 @@
                     {{ status.tipo }}
                      </option>
                 </select>
-                <button class="delete-btn">Cancelar</button>
+                <button class="delete-btn" @click="deleteAcai(acai.id)">Cancelar</button>
             </div>
         </div>
     </div>
@@ -65,6 +65,16 @@ export default{
             const data = await req.json()
 
             this.listStatus = data
+
+        },
+        async deleteAcai(id){
+            const req = await fetch(`https://api-acai.herokuapp.com/listAcai/${id}`, {
+                method: "DELETE"
+            })
+
+            const res = await req.json()
+
+            this.getPedidos()
 
         }
     }, mounted(){
